@@ -1,0 +1,55 @@
+
+/* .ItemListIn{
+    position: relative;
+} */
+.btn-text{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+}
+.btn-text p {
+    z-index: 1;
+}
+.btn-box{
+    box-sizing: border-box;
+    width: 16px;
+    height: 16px;
+    padding: 0;
+    border: 1.4px solid #AEAEAE;
+    border-radius: 4px;
+    background-color: white;
+    position: relative;
+}
+
+.test{
+    border: none;
+    background-color: white;
+    padding: 0;
+}
+.test:after {
+    content: '\2807';
+    color: #AEAEAE;
+}
+
+.btn-box:focus{
+    background: #712FFF;        
+}
+
+.itemsss{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+}
+
+.top-items{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.menu{
+    position: absolute;
+    top: 50px;
+    z-index: 100;
+}

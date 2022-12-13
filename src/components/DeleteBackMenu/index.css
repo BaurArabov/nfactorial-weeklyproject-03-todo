@@ -1,0 +1,39 @@
+.InputBackMenu{
+    display: flex;
+    flex-direction: column;
+    width: 270px;
+    
+}
+.delete-menu{
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    border-radius: 12px 12px 0px 0px;
+}
+.back-menu{
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    border-radius: 0px 0px 12px 12px;
+    
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.16);
+}
+.delete-menu img {
+    width: 20px;
+    height: 20px;
+}
+.back-menu img {
+    width: 20px;
+    height: 20px;
+}
+.delete-menu p {
+    margin: 0;
+    color: #353535;
+}
+.back-menu p {
+    margin: 0;
+    color: #353535;
+}
+.InputBackMenu button:hover{
+    background: rgba(8, 30, 52, 0.2);
+}

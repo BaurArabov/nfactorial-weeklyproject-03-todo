@@ -1,0 +1,26 @@
+.MoveToTrash{
+    display: flex;
+    flex-direction: column;
+    width: 270px;
+}
+.move-to-trash-menu{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-radius: 12px;
+   
+}
+.move-to-trash-menu img {
+    width: 20px;
+    height: 20px;
+}
+.move-to-trash-menu p {
+    margin: 0;
+    color: #353535;
+}
+.MoveToTrash button:hover{
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.16);
+}
+.MoveToTrash:active{
+    transform: translateX(1px);
+}
