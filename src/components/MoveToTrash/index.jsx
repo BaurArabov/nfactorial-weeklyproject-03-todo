@@ -10,8 +10,9 @@ export default function MoveToTrash(props) {
     <div className="menu">
       <div className="MoveToTrash">
         <button
+          value={props.item}
           className="move-to-trash-menu"
-          onClick={() => props.handleMoveToTrash(props.item.id)}
+          onClick={() => props.handeRemoveItem(props.item.id)}
         >
           <img src={Delete} alt="delete" />
           <p>Move To Trash</p>

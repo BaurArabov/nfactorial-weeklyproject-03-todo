@@ -3,16 +3,16 @@ import { useState } from "react";
 import "./index.css";
 
 import React from "react";
-import MoveTrash from "../MoveToTrash";
+import MoveToTrash from "../MoveToTrash";
+import DeleteBackMenu from "../DeleteBackMenu";
 import { useEffect } from "react";
 
 export default function ItemList(props) {
   const [currItems, setCurrItems] = useState([]);
-  const [isTrash, setTrash] = useState([]);
 
   useEffect(() => {
-    setCurrItems(props.items); //get item form another modal
-  }, [props.items]); //updating by props
+    setCurrItems(props.items);
+  }, [props.items]); //update every time new item was added
 
   function handleOpenMenu(id) {
     //get by id of an item
@@ -25,6 +25,7 @@ export default function ItemList(props) {
         };
       else return item;
     });
+
     setCurrItems(newItems);
   }
 
@@ -40,39 +41,60 @@ export default function ItemList(props) {
     setCurrItems(itemIsDone.sort((a, b) => a.isDone - b.isDone));
   };
 
-  const filteredItems =
-    props.type === "all"
-      ? currItems
-      : props.type === "done"
-      ? currItems.filter((item) => item.isDone)
-      : isTrash;
-
-  function handleMoveToTrash(id) {
-    // setTrash(currItems.filter((item) => item.id === id));
-
-    const itemIsTrashed = currItems.filter((item) => {
+  const handeRemoveItem = (id) => {
+    const removedItem = currItems.map((item) => {
       if (item.id === id) {
         return {
           ...item,
+          isMenuOpen: false,
           isItemTrash: !item.isItemTrash,
         };
-      }
+      } else return item;
     });
-    setTrash(itemIsTrashed);
+    setCurrItems(removedItem);
+  };
 
-    setCurrItems(currItems.filter((item) => item.id !== id));
-  }
+  const handleMoveBack = (id) => {
+    const backItem = currItems.map((item) => {
+      if (item.id === id) {
+        return {
+          ...item,
+          isMenuOpen: false,
+          isItemTrash: !item.isItemTrash,
+        };
+      } else return item;
+    });
+    setCurrItems(backItem);
+  };
+
+  const handeDeleteItem = (id) => {
+    setCurrItems((prevItems) => prevItems.filter((item) => item.id !== id));
+  };
+
+  const filteredItems =
+    props.type === "all"
+      ? currItems.filter((item) => !item.isItemTrash)
+      : props.type === "done"
+      ? currItems.filter((item) => item.isDone && !item.isItemTrash)
+      : props.type === "trash"
+      ? currItems.filter((item) => item.isItemTrash)
+      : alert("Error!!");
 
   return (
     <div className="ItemListIn">
       {filteredItems.map((item) => (
         <div className="itemsss" key={item.id}>
-          <div className="top-items">
-            <button
-              className="test"
-              onClick={() => handleOpenMenu(item.id)}
-            ></button>
+          <div
+            className="top-items"
+            style={{
+              display: props.type === "trash" ? "block" : "",
+            }}
+          >
             <div className="btn-text">
+              <button
+                className="test"
+                onClick={() => handleOpenMenu(item.id)}
+              ></button>
               <input
                 value={item}
                 className="btn-box"
@@ -88,8 +110,15 @@ export default function ItemList(props) {
                 {item.task}
               </p>
             </div>
-            {item.isMenuOpen && (
-              <MoveTrash handleMoveToTrash={handleMoveToTrash} item={item} />
+            {item.isMenuOpen && props.type !== "trash" && (
+              <MoveToTrash handeRemoveItem={handeRemoveItem} item={item} />
+            )}
+            {item.isMenuOpen && props.type === "trash" && (
+              <DeleteBackMenu
+                handleDeleteItem={handeDeleteItem}
+                handleMoveBack={handleMoveBack}
+                item={item}
+              />
             )}
           </div>
         </div>
@@ -97,5 +126,3 @@ export default function ItemList(props) {
     </div>
   );
 }
-
-// set - срасывает все элементы в массиве -> показывает только один элемент в треш

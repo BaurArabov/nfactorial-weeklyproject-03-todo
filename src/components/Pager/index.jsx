@@ -6,22 +6,27 @@ import InputMenu from "../InputMenu";
 
 export default function Pager(props) {
   const [isInpuMenuOpen, setMenuOpen] = useState(false);
+
   const buttons = [
     {
+      id: 1,
       type: "all",
       label: "To Do",
     },
     {
+      id: 2,
       type: "done",
       label: "Done",
     },
     {
+      id: 3,
       type: "trash",
       label: "Trash",
     },
   ];
 
   function handleTriggerMenu() {
+    //function for openning and closing Input Menu Modal
     setMenuOpen((prevMenu) => !prevMenu);
   }
 
@@ -30,10 +35,9 @@ export default function Pager(props) {
       <div className="items">
         {buttons.map((itemB) => (
           <button
-            key={itemB.type}
+            key={itemB.id}
             type="button"
-            className=""
-            onClick={() => props.handleChangeStatus(itemB.type)}
+            onClick={() => props.handleChangeStatus(itemB.type, itemB.label)}
           >
             {itemB.label}
           </button>

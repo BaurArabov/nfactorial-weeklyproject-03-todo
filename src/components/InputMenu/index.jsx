@@ -4,10 +4,10 @@ import "./index.css";
 import React from "react";
 
 export default function InputMenu(props) {
-  const [item, setItem] = useState("");
+  const [inputItem, setInputItem] = useState(""); //input trigger
 
   function handleChangeItem(event) {
-    setItem(event.target.value);
+    setInputItem(event.target.value); //change item with setItem
   }
 
   return (
@@ -16,11 +16,11 @@ export default function InputMenu(props) {
         <h3>Add New To Do</h3>
         <textarea
           placeholder="Your text"
-          wrap="soft"
-          value={item}
-          onChange={handleChangeItem}
+          value={inputItem}
+          onChange={handleChangeItem} //input change trigger
         ></textarea>
-        <button className="btn-add" onClick={() => props.handleAdd(item)}>
+        {/* add changed item in handleAdd*/}
+        <button className="btn-add" onClick={() => props.handleAdd(inputItem)}>
           Add
         </button>
       </div>

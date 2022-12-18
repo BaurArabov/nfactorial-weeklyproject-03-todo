@@ -17,37 +17,44 @@ function App() {
       task: "Make your project",
       isDone: false,
       isItemTrash: false,
+      isMenuOpen: false,
     },
     {
       id: uuidv4(),
       task: "Push it on your git",
       isDone: false,
       isItemTrash: false,
+      isMenuOpen: false,
     },
     {
       id: uuidv4(),
       task: "Send project ",
       isDone: false,
       isItemTrash: false,
+      isMenuOpen: false,
     },
   ];
 
   const [items, setItems] = useState(initItems);
   const [type, setType] = useState("all");
+  const [name, setName] = useState("");
 
-  function handleAdd(item) {
-    if (!item) return;
+  function handleAdd(inputItem) {
+    if (!inputItem) return;
 
     const newItem = {
       id: uuidv4(),
-      task: item,
+      task: inputItem,
       isDone: false,
       isItemTrash: false,
+      isMenuOpen: false,
     };
     setItems((prevItems) => [newItem, ...prevItems]);
   }
 
-  const handleChangeStatus = (typeFromButton) => {
+  const handleChangeStatus = (typeFromButton, nameFromButton) => {
+    //function to change type and name
+    setName(nameFromButton);
     setType(typeFromButton);
   };
 
@@ -55,9 +62,8 @@ function App() {
     <div className="App">
       <Title />
       <Pager handleAdd={handleAdd} handleChangeStatus={handleChangeStatus} />
-      <SectionName />
+      <SectionName name={name} />
       <ItemList items={items} type={type} />
-      {/* <InputBackMenu /> */}
     </div>
   );
 }
